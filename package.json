@@ -1,0 +1,184 @@
+{
+  "devDependencies": {
+    "@semantic-release/changelog": "5.0.1",
+    "@semantic-release/commit-analyzer": "8.0.1",
+    "@semantic-release/exec": "5.0.0",
+    "@semantic-release/git": "9.0.0",
+    "@semantic-release/github": "7.0.5",
+    "@semantic-release/release-notes-generator": "9.0.1",
+    "conventional-changelog-conventionalcommits": "4.2.3",
+    "gradle-semantic-release-plugin": "1.4.1",
+    "semantic-release": "17.0.4"
+  },
+  "release": {
+    "plugins": [
+      "@semantic-release/github",
+      [
+        "@semantic-release/commit-analyzer",
+        {
+          "releaseRules": [
+            {
+              "type": "refactor",
+              "release": "patch"
+            },
+            {
+              "type": "style",
+              "release": "patch"
+            }
+          ],
+          "preset": "conventionalcommits",
+          "presetConfig": {
+            "types": [
+              {
+                "type": "feat",
+                "section": "Features"
+              },
+              {
+                "type": "feature",
+                "section": "Features"
+              },
+              {
+                "type": "fix",
+                "section": "Bug Fixes"
+              },
+              {
+                "type": "perf",
+                "section": "Performance Improvements"
+              },
+              {
+                "type": "revert",
+                "section": "Reverts"
+              },
+              {
+                "type": "docs",
+                "section": "Documentation"
+              },
+              {
+                "type": "style",
+                "section": "Styles"
+              },
+              {
+                "type": "chore",
+                "section": "Miscellaneous Chores"
+              },
+              {
+                "type": "refactor",
+                "section": "Code Refactoring"
+              },
+              {
+                "type": "test",
+                "section": "Tests"
+              },
+              {
+                "type": "build",
+                "section": "Build System"
+              },
+              {
+                "type": "ci",
+                "section": "Continuous Integration"
+              }
+            ]
+          },
+          "parserOpts": {
+            "noteKeywords": [
+              "BREAKING CHANGE",
+              "BREAKING CHANGES"
+            ]
+          }
+        }
+      ],
+      [
+        "@semantic-release/release-notes-generator",
+        {
+          "preset": "conventionalcommits",
+          "presetConfig": {
+            "types": [
+              {
+                "type": "feat",
+                "section": "Features"
+              },
+              {
+                "type": "feature",
+                "section": "Features"
+              },
+              {
+                "type": "fix",
+                "section": "Bug Fixes"
+              },
+              {
+                "type": "perf",
+                "section": "Performance Improvements"
+              },
+              {
+                "type": "revert",
+                "section": "Reverts"
+              },
+              {
+                "type": "docs",
+                "section": "Documentation"
+              },
+              {
+                "type": "style",
+                "section": "Styles"
+              },
+              {
+                "type": "chore",
+                "section": "Miscellaneous Chores"
+              },
+              {
+                "type": "refactor",
+                "section": "Code Refactoring"
+              },
+              {
+                "type": "test",
+                "section": "Tests"
+              },
+              {
+                "type": "build",
+                "section": "Build System"
+              },
+              {
+                "type": "ci",
+                "section": "Continuous Integration"
+              }
+            ]
+          },
+          "parserOpts": {
+            "noteKeywords": [
+              "BREAKING CHANGE",
+              "BREAKING CHANGES"
+            ]
+          },
+          "writerOpts": {
+            "commitsSort": [
+              "scope",
+              "subject"
+            ]
+          }
+        }
+      ],
+      "@semantic-release/changelog",
+      [
+        "@semantic-release/git",
+        {
+          "assets": [
+            "gradle.properties",
+            "CHANGELOG.md"
+          ]
+        }
+      ],
+      [
+        "@semantic-release/exec",
+        {
+          "publishCmd": "./gradlew publishToSonatype -Dorg.gradle.daemon=false -Pversion=${nextRelease.version} -PossSonatypeUsername=${process.env.OSS_SONATYPE_USERNAME} -PossSonatypePassword=${process.env.OSS_SONATYPE_PASSWORD} -Psigning.keyId=${process.env.SIGNING_KEY_ID} -Psigning.password=${process.env.SIGNING_PASSWORD} -Dorg.gradle.internal.publish.checksums.insecure=true"
+        }
+      ]
+    ]
+  },
+  "engines": {
+    "node": "^12.12.0"
+  },
+  "scripts": {
+    "semantic-release": "semantic-release"
+  }
+}
