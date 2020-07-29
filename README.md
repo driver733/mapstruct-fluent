@@ -1,7 +1,7 @@
 # Mapstruct fluent extensions generator
 
 [![Build](https://github.com/driver733/mapstruct-fluent/workflows/Build/badge.svg?branch=master)](https://github.com/driver733/mapstruct-fluent/actions?query=workflow%3ABuild+branch%3Amaster)
-[![Maven Central](https://img.shields.io/maven-central/v/com.driver733.mapstruct-fluent/annotations)](https://search.maven.org/search?q=com.driver733.mapstruct)
+[![Maven Central](https://img.shields.io/maven-central/v/com.driver733.mapstruct-fluent/processor)](https://search.maven.org/search?q=com.driver733.mapstruct)
 
 [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/driver733/mapstruct-fluent/actions?query=workflow%3ARelease)
 
