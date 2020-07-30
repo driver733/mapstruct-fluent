@@ -2,13 +2,12 @@ import java.net.URI
 import java.util.*
 
 plugins {
-    id("com.driver733.gradle-kotlin-setup-plugin") version "1.1.3"
-    `maven-publish`
-    signing
+    id("com.driver733.gradle-kotlin-setup-plugin") version "3.0.0"
     id("io.codearte.nexus-staging") version "0.21.2"
     id("de.marcphilipp.nexus-publish") version "0.4.0"
+    `maven-publish`
+    signing
 }
-
 
 
 allprojects {
@@ -36,7 +35,6 @@ allprojects {
     }
 
 }
-
 
 nexusStaging {
     packageGroup = "com.driver733"
@@ -67,7 +65,7 @@ releaseSubprojects()
                     withJavadocJar()
                 }
 
-                configure<PublishingExtension> {
+                publishing {
                     publications {
                         create<MavenPublication>(name) {
                             from(components["java"])
@@ -151,5 +149,22 @@ releaseSubprojects()
             }
         }
 
+releaseSubprojects().forEach {
+    it.plugins.apply("com.driver733.gradle-kotlin-setup-plugin")
+    it.dependencies {
+        implementation("com.squareup:kotlinpoet:1.5.0")
+    }
+}
+
+processorSubprojects().forEach {
+    it.dependencies {
+        implementation("com.google.auto.service:auto-service:1.0-rc6")
+        kapt("com.google.auto.service:auto-service:1.0-rc6")
+    }
+}
+
 fun releaseSubprojects() =
+        subprojects.filter { listOf("processor", "processor-spring", "common").contains(it.name) }
+
+fun processorSubprojects() =
         subprojects.filter { listOf("processor", "processor-spring").contains(it.name) }

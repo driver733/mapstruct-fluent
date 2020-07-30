@@ -1,16 +1,9 @@
 package com.driver733.mapstructfluent
 
-import KAPT_KOTLIN_GENERATED_OPTION_NAME
-import builder
-import capitalize
-import className
 import com.google.auto.service.AutoService
 import com.squareup.kotlinpoet.FileSpec
 import com.squareup.kotlinpoet.FunSpec
 import com.squareup.kotlinpoet.asTypeName
-import kotlinType
-import process
-import toKotlinType
 import java.io.File
 import javax.annotation.processing.*
 import javax.lang.model.SourceVersion
