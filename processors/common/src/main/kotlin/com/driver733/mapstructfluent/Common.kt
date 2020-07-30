@@ -1,3 +1,5 @@
+package com.driver733.mapstructfluent
+
 import com.squareup.kotlinpoet.*
 import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
 import org.mapstruct.AfterMapping
