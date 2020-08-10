@@ -1,3 +1,11 @@
+### [1.0.2](https://github.com/driver733/mapstruct-fluent/compare/v1.0.1...v1.0.2) (2020-08-10)
+
+
+### Bug Fixes
+
+* nullable types handling ([5382592](https://github.com/driver733/mapstruct-fluent/commit/5382592b561b50f199391b82647af7171f8d68af))
+* tests ([40f8e36](https://github.com/driver733/mapstruct-fluent/commit/40f8e362b312a9c9c5cd25ce661185cb97a71b06))
+
 ### [1.0.1](https://github.com/driver733/mapstruct-fluent/compare/v1.0.0...v1.0.1) (2020-07-30)
 
 
