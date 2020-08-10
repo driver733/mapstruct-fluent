@@ -1,3 +1,16 @@
+### [1.0.3](https://github.com/driver733/mapstruct-fluent/compare/v1.0.2...v1.0.3) (2020-08-10)
+
+
+### Bug Fixes
+
+* processor-spring ([b057a2e](https://github.com/driver733/mapstruct-fluent/commit/b057a2e411252cf9221f2b1e63aa9ac19e945507))
+
+
+### Documentation
+
+* readme fix ([648329f](https://github.com/driver733/mapstruct-fluent/commit/648329f91563ed22f046d5cb5557400329e7b59c))
+* readme fix ([95330ac](https://github.com/driver733/mapstruct-fluent/commit/95330ac3d71304a0233b92b51bf7e094748bfaeb))
+
 ### [1.0.2](https://github.com/driver733/mapstruct-fluent/compare/v1.0.1...v1.0.2) (2020-08-10)
 
 
