@@ -84,10 +84,10 @@ Add this to your project's `build.gradle`:
 
 ```groovy
 dependencies {
-    annotationProcessor 'com.driver733.mapstruct-fluent:processor:1.0.2'
-    implementation 'com.driver733.mapstruct-fluent:processor:1.0.2'
-    annotationProcessor 'com.driver733.mapstruct-fluent:processor-spring:1.0.2'
-    implementation 'com.driver733.mapstruct-fluent:processor-spring:1.0.2'
+    annotationProcessor 'com.driver733.mapstruct-fluent:processor:1.0.3'
+    implementation 'com.driver733.mapstruct-fluent:processor:1.0.3'
+    annotationProcessor 'com.driver733.mapstruct-fluent:processor-spring:1.0.3'
+    implementation 'com.driver733.mapstruct-fluent:processor-spring:1.0.3'
 }
 ```
 
@@ -104,10 +104,10 @@ dependencies {
 
     ```kotlin
     dependencies {
-        kapt("com.driver733.mapstruct-fluent:processor:1.0.2")
-        implementation("com.driver733.mapstruct-fluent:processor:1.0.2")
-        kapt("com.driver733.mapstruct-fluent:processor-spring:1.0.2")
-        implementation("com.driver733.mapstruct-fluent:processor-spring:1.0.2")
+        kapt("com.driver733.mapstruct-fluent:processor:1.0.3")
+        implementation("com.driver733.mapstruct-fluent:processor:1.0.3")
+        kapt("com.driver733.mapstruct-fluent:processor-spring:1.0.3")
+        implementation("com.driver733.mapstruct-fluent:processor-spring:1.0.3")
     }
     ``` 
 
@@ -120,12 +120,12 @@ Add this to your project's `pom.xml`:
     <dependency>
       <groupId>com.driver733.mapstruct-fluent</groupId>
       <artifactId>processor</artifactId>
-      <version>1.0.2</version>
+      <version>1.0.3</version>
     </dependency>
     <dependency>
       <groupId>com.driver733.mapstruct-fluent</groupId>
       <artifactId>processor-spring</artifactId>
-      <version>1.0.2</version>
+      <version>1.0.3</version>
     </dependency>
 </dependencies>
 <pluginManagement>
@@ -139,12 +139,12 @@ Add this to your project's `pom.xml`:
                     <annotationProcessorPath>
                         <groupId>com.driver733.mapstruct-fluent</groupId>
                         <artifactId>processor</artifactId>
-                        <version>1.0.2</version>
+                        <version>1.0.3</version>
                     </annotationProcessorPath>
                    <annotationProcessorPath>
                         <groupId>com.driver733.mapstruct-fluent</groupId>
                         <artifactId>processor-spring</artifactId>
-                        <version>1.0.2</version>
+                        <version>1.0.3</version>
                     </annotationProcessorPath>
                 </annotationProcessorPaths>
             </configuration>

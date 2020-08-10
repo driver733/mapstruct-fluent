@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component
 import javax.annotation.PostConstruct
 
 @Component
-private class ApplicationContextService(
+class ApplicationContextService(
         private val context: ApplicationContext
 ) {
     companion object {
