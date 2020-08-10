@@ -84,9 +84,10 @@ Add this to your project's `build.gradle`:
 
 ```groovy
 dependencies {
-    implementation 'com.driver733.mapstruct-fluent:common:1.0.2'
     annotationProcessor 'com.driver733.mapstruct-fluent:processor:1.0.2'
+    implementation 'com.driver733.mapstruct-fluent:processor:1.0.2'
     annotationProcessor 'com.driver733.mapstruct-fluent:processor-spring:1.0.2'
+    implementation 'com.driver733.mapstruct-fluent:processor-spring:1.0.2'
 }
 ```
 
@@ -103,9 +104,10 @@ dependencies {
 
     ```kotlin
     dependencies {
-        implementation("com.driver733.mapstruct-fluent:common:1.0.2")
         kapt("com.driver733.mapstruct-fluent:processor:1.0.2")
+        implementation("com.driver733.mapstruct-fluent:processor:1.0.2")
         kapt("com.driver733.mapstruct-fluent:processor-spring:1.0.2")
+        implementation("com.driver733.mapstruct-fluent:processor-spring:1.0.2")
     }
     ``` 
 
@@ -117,22 +119,38 @@ Add this to your project's `pom.xml`:
 <dependencies>
     <dependency>
       <groupId>com.driver733.mapstruct-fluent</groupId>
-      <artifactId>common</artifactId>
-      <version>1.0.2</version>
-    </dependency>
-    <dependency>
-      <groupId>com.driver733.mapstruct-fluent</groupId>
       <artifactId>processor</artifactId>
       <version>1.0.2</version>
-      <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>com.driver733.mapstruct-fluent</groupId>
       <artifactId>processor-spring</artifactId>
       <version>1.0.2</version>
-      <scope>provided</scope>
     </dependency>
 </dependencies>
+<pluginManagement>
+    <plugins>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <version>...</version>
+            <configuration>
+                <annotationProcessorPaths>
+                    <annotationProcessorPath>
+                        <groupId>com.driver733.mapstruct-fluent</groupId>
+                        <artifactId>processor</artifactId>
+                        <version>1.0.2</version>
+                    </annotationProcessorPath>
+                   <annotationProcessorPath>
+                        <groupId>com.driver733.mapstruct-fluent</groupId>
+                        <artifactId>processor-spring</artifactId>
+                        <version>1.0.2</version>
+                    </annotationProcessorPath>
+                </annotationProcessorPaths>
+            </configuration>
+        </plugin>
+    </plugins>
+</pluginManagement>
 ```
 
 ## Development
