@@ -84,9 +84,9 @@ Add this to your project's `build.gradle`:
 
 ```groovy
 dependencies {
-    implementation 'com.driver733.mapstruct-fluent:annotation:1.0.0'
-    annotationProcessor 'com.driver733.mapstruct-fluent:processor:1.0.0'
-    annotationProcessor 'com.driver733.mapstruct-fluent:processor-spring:1.0.0'
+    implementation 'com.driver733.mapstruct-fluent:common:1.0.2'
+    annotationProcessor 'com.driver733.mapstruct-fluent:processor:1.0.2'
+    annotationProcessor 'com.driver733.mapstruct-fluent:processor-spring:1.0.2'
 }
 ```
 
@@ -103,9 +103,9 @@ dependencies {
 
     ```kotlin
     dependencies {
-        implementation("com.driver733.mapstruct-fluent:annotation:1.0.0")
-        kapt("com.driver733.mapstruct-fluent:processor:1.0.0")
-        kapt("com.driver733.mapstruct-fluent:processor-spring:1.0.0")
+        implementation("com.driver733.mapstruct-fluent:common:1.0.2")
+        kapt("com.driver733.mapstruct-fluent:processor:1.0.2")
+        kapt("com.driver733.mapstruct-fluent:processor-spring:1.0.2")
     }
     ``` 
 
@@ -117,19 +117,19 @@ Add this to your project's `pom.xml`:
 <dependencies>
     <dependency>
       <groupId>com.driver733.mapstruct-fluent</groupId>
-      <artifactId>annotations</artifactId>
-      <version>1.0.0</version>
+      <artifactId>common</artifactId>
+      <version>1.0.2</version>
     </dependency>
     <dependency>
       <groupId>com.driver733.mapstruct-fluent</groupId>
       <artifactId>processor</artifactId>
-      <version>1.0.0</version>
+      <version>1.0.2</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>com.driver733.mapstruct-fluent</groupId>
       <artifactId>processor-spring</artifactId>
-      <version>1.0.0</version>
+      <version>1.0.2</version>
       <scope>provided</scope>
     </dependency>
 </dependencies>

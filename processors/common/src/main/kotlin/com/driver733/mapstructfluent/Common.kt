@@ -2,6 +2,7 @@ package com.driver733.mapstructfluent
 
 import com.squareup.kotlinpoet.*
 import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
+import org.jetbrains.annotations.Nullable
 import org.mapstruct.AfterMapping
 import org.mapstruct.BeforeMapping
 import org.mapstruct.Mapper
@@ -58,11 +59,19 @@ fun Name.capitalize() = this.toString().capitalize()
 
 fun FileSpec.Companion.builder(fileName: String) = builder("", fileName)
 
-fun className(vararg simpleNames: String) = ClassName("", *simpleNames)
+fun className(vararg elements: Element) = ClassName("", *elements.map { it.simpleName.toString() }.toTypedArray())
 
-fun VariableElement.kotlinType() = this.asType().asTypeName().toKotlinType()
+fun VariableElement.kotlinType() = kotlinTypeWithInferredNullability()
 
-fun TypeName.toKotlinType(): TypeName =
+private fun VariableElement.kotlinTypeWithInferredNullability() =
+        typeToKotlinType()
+                .let { if (isNullable()) it.copy(true) else it.copy(false) }
+
+private fun VariableElement.typeToKotlinType() = asType().asTypeName().toKotlinType()
+
+fun Element.isNullable() = this.getAnnotation(Nullable::class.java) != null
+
+private fun TypeName.toKotlinType(): TypeName =
         when (this) {
             is ParameterizedTypeName -> {
                 (rawType.toKotlinType() as ClassName).parameterizedBy(
