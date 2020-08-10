@@ -4,7 +4,6 @@ import org.assertj.core.api.Assertions.assertThat
 import org.mapstruct.factory.Mappers
 import org.spekframework.spek2.Spek
 import org.spekframework.spek2.style.gherkin.Feature
-import toEmployeeView
 
 object EmployeeMapperTest : Spek({
 
