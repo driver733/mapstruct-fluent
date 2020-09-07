@@ -9,6 +9,8 @@ import org.mapstruct.Mapper
 import javax.annotation.processing.ProcessingEnvironment
 import javax.annotation.processing.RoundEnvironment
 import javax.lang.model.element.*
+import javax.lang.model.element.Modifier.ABSTRACT
+import javax.lang.model.element.Modifier.PUBLIC
 import javax.tools.Diagnostic
 
 const val KAPT_KOTLIN_GENERATED_OPTION_NAME = "kapt.kotlin.generated"
@@ -31,11 +33,14 @@ fun process(roundEnv: RoundEnvironment?, procEnv: ProcessingEnvironment, process
 
 fun findAndProcessMappers(env: RoundEnvironment?, src: String?, processor: (method: ExecutableElement, mapper: Element, src: String?) -> Unit) {
     env?.getElementsAnnotatedWith(Mapper::class.java)?.forEach { mapper ->
-        mapper.enclosedElements
-                .filter { it.kind == ElementKind.METHOD }
-                .map { it as ExecutableElement }
-                .filter(isMappingMethod())
-                .forEach {
+        mapper.takeIf { it.modifiers.contains(ABSTRACT) }
+                ?.enclosedElements
+                ?.filter { it.kind == ElementKind.METHOD }
+                ?.filter { it.modifiers.contains(PUBLIC) }
+                ?.filter { it.modifiers.contains(ABSTRACT) }
+                ?.map { it as ExecutableElement }
+                ?.filter(isMappingMethod())
+                ?.forEach {
                     processor(it, mapper, src)
                 }
     }
