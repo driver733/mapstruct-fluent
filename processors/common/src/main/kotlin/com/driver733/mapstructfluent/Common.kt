@@ -11,4 +11,3 @@ fun fileSpecBuilder(procEnv: ProcessingEnvironment, mapper: Element, suffix: Str
         procEnv.elementUtils.getPackageOf(mapper).toString(),
         "${className(mapper).simpleName.capitalize()}$suffix"
     )
-

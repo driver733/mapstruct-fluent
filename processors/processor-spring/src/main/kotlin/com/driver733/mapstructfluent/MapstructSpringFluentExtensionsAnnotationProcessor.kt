@@ -49,5 +49,4 @@ class MapstructSpringFluentExtensionsAnnotationProcessor : AbstractProcessor(), 
             )
             .build()
             .writeTo(File(src!!).apply { mkdir() })
-
 }
