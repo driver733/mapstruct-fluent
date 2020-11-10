@@ -1,3 +1,15 @@
+### [1.0.5](https://github.com/driver733/mapstruct-fluent/compare/v1.0.4...v1.0.5) (2020-11-10)
+
+
+### Bug Fixes
+
+* generation of overload methods with different types ([2132f85](https://github.com/driver733/mapstruct-fluent/commit/2132f859672bc176b7990e23d5679f535de0be2a))
+
+
+### Miscellaneous Chores
+
+* formatting fix ([9f0695e](https://github.com/driver733/mapstruct-fluent/commit/9f0695eddf6cdb41526eafde9fa93d0f6f77ab99))
+
 ### [1.0.4](https://github.com/driver733/mapstruct-fluent/compare/v1.0.3...v1.0.4) (2020-09-07)
 
 
