@@ -1,3 +1,18 @@
+### [1.0.6](https://github.com/driver733/mapstruct-fluent/compare/v1.0.5...v1.0.6) (2020-12-18)
+
+
+### Bug Fixes
+
+* custom mapper ([0506873](https://github.com/driver733/mapstruct-fluent/commit/050687376d56f213494e5204cec78a8afe661ef8))
+* custom mapper impl ext fun generation ([39f409d](https://github.com/driver733/mapstruct-fluent/commit/39f409d4d70e7fc695d28d0fe5317a11088bc032))
+* gradle settings ([ebb935c](https://github.com/driver733/mapstruct-fluent/commit/ebb935ce0bd4d538276d4cff3a61130a950227e0))
+* project config ([4cd1857](https://github.com/driver733/mapstruct-fluent/commit/4cd1857f27a79d3e67c569627258ef3a675b75ea))
+
+
+### Code Refactoring
+
+* tests ([697f022](https://github.com/driver733/mapstruct-fluent/commit/697f02292baf8173a5ea38a9c2fea5c0c47f32a7))
+
 ### [1.0.5](https://github.com/driver733/mapstruct-fluent/compare/v1.0.4...v1.0.5) (2020-11-10)
 
 
