@@ -3,7 +3,7 @@ import java.time.Duration
 import java.util.*
 
 plugins {
-    id("com.driver733.gradle-kotlin-setup-plugin") version "5.0.0"
+    id("com.driver733.gradle-kotlin-setup-plugin") version "5.0.1"
     id("io.codearte.nexus-staging") version "0.21.2"
     id("de.marcphilipp.nexus-publish") version "0.4.0"
     `maven-publish`
