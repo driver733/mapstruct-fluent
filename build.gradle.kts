@@ -3,7 +3,7 @@ import java.time.Duration
 import java.util.*
 
 plugins {
-    id("com.driver733.gradle-kotlin-setup-plugin") version "4.2.1"
+    id("com.driver733.gradle-kotlin-setup-plugin") version "5.0.1"
     id("io.codearte.nexus-staging") version "0.21.2"
     id("de.marcphilipp.nexus-publish") version "0.4.0"
     `maven-publish`
@@ -159,21 +159,36 @@ releaseSubprojects()
 
         }
 
-releaseSubprojects().forEach {
-    it.dependencies {
-        implementation("com.squareup:kotlinpoet:1.5.0")
-    }
-}
+exampleSubprojects()
+        .forEach {
+            it.dependencies {
+                testImplementation("io.kotest:kotest-assertions-compiler:4.3.0")
+            }
+        }
 
-processorSubprojects().forEach {
-    it.dependencies {
-        implementation("com.google.auto.service:auto-service:1.0-rc6")
-        kapt("com.google.auto.service:auto-service:1.0-rc6")
-    }
-}
+processorSubprojects()
+        .forEach {
+            it.dependencies {
+                kapt("com.google.auto.service:auto-service:1.0-rc6")
+                implementation("com.google.auto.service:auto-service:1.0-rc6")
+            }
+        }
+
+releaseSubprojects()
+        .forEach {
+            it.dependencies {
+                implementation("com.squareup:kotlinpoet:1.5.0")
+            }
+        }
 
 fun releaseSubprojects() =
-    subprojects.filter { it.name in listOf("processor", "processor-spring", "common") }
+        subprojects
+                .filter { it.name in listOf("processor", "processor-spring", "common") }
 
 fun processorSubprojects() =
-    subprojects.filter { it.name in listOf("processor", "processor-spring") }
+        subprojects
+                .filter { it.name in listOf("processor", "processor-spring") }
+
+fun exampleSubprojects() =
+        subprojects
+                .filter { it.name in listOf("example", "example-spring") }

@@ -1,25 +1,63 @@
 package com.driver733.mapstructfluent
 
-import org.assertj.core.api.Assertions.assertThat
-import org.junit.jupiter.api.Test
-import org.springframework.beans.factory.annotation.Autowired
+import io.kotest.core.spec.style.FunSpec
+import io.kotest.matchers.compilation.shouldNotCompile
+import io.kotest.matchers.shouldBe
+
 import org.springframework.boot.test.context.SpringBootTest
 
-@SpringBootTest
-class EmployeeMapperTest @Autowired constructor(
-        private val mapper: EmployeeMapper
-) {
 
-    @Test
-    fun `extension fun result must be equal to the mapper instance fun result`() {
+@SpringBootTest
+class EmployeeMapperTest(
+    private val mapper: EmployeeMapper
+) : FunSpec({
+
+    test("mapstruct impl") {
         val model = EmployeeModel("Alex")
-        assertThat(
-                model.toEmployeeView()
-        ).isEqualTo(
+
+        model
+            .toEmployeeView()
+            .shouldBe(
                 mapper.toEmployeeView(model)
-        )
+            )
     }
 
-}
+    test("custom mapper impl") {
+        val model = EmployeeModel("Alex")
 
+        model
+            .toEmployeeCustomView()
+            .shouldBe(
+                mapper.toEmployeeCustomView(model)
+            )
+    }
 
+    test("ignore BeforeMapping") {
+        EmployeeMapper::class.java.getBean().toEmployeeViewBefore()
+
+        """
+            package com.driver733.mapstructfluent
+            class A {
+                fun b() {
+                    EmployeeModel("Alex").toEmployeeViewBefore()
+                }
+           }
+        """.trimIndent()
+            .shouldNotCompile()
+    }
+
+    test("ignore AfterMapping") {
+        EmployeeMapper::class.java.getBean().toEmployeeViewAfter()
+
+        """
+            package com.driver733.mapstructfluent
+            class A {
+                fun b() {
+                    EmployeeModel("Alex").toEmployeeViewAfter()
+                }
+           }
+        """.trimIndent()
+            .shouldNotCompile()
+    }
+
+})

@@ -1,22 +1,55 @@
 package com.driver733.mapstructfluent
 
-import org.assertj.core.api.Assertions.assertThat
+import io.kotest.core.spec.style.FunSpec
+import io.kotest.matchers.compilation.shouldNotCompile
+import io.kotest.matchers.shouldBe
+
 import org.mapstruct.factory.Mappers
-import org.spekframework.spek2.Spek
-import org.spekframework.spek2.style.gherkin.Feature
 
-object EmployeeMapperTest : Spek({
+class EmployeeMapperTest : FunSpec({
 
-    Feature("Fluent extension fun") {
-        Scenario("mapper") {
-            val model = EmployeeModel("Alex")
-            val actual = model.toEmployeeView()
-            Then("Extension fun result is equal to mapper fun result") {
-                assertThat(actual).isEqualTo(
-                        Mappers.getMapper(EmployeeMapper::class.java).toEmployeeView(model)
-                )
-            }
-        }
+    test("mapstruct impl") {
+        val model = EmployeeModel("Alex")
+
+        model
+            .toEmployeeView()
+            .shouldBe(
+                Mappers
+                    .getMapper(EmployeeMapper::class.java)
+                    .toEmployeeView(model)
+            )
+    }
+
+    test("ignore BeforeMapping impl") {
+        Mappers
+            .getMapper(EmployeeMapper::class.java)
+            .toEmployeeViewBefore()
+
+        """
+            package com.driver733.mapstructfluent
+            class A {
+                fun b() {
+                    EmployeeModel("Alex").toEmployeeViewBefore()
+                }
+           }
+        """.trimIndent()
+            .shouldNotCompile()
+    }
+
+    test("ignore AfterMapping impl") {
+        Mappers
+            .getMapper(EmployeeMapper::class.java)
+            .toEmployeeViewAfter()
+
+        """
+            package com.driver733.mapstructfluent
+            class A {
+                fun b() {
+                    EmployeeModel("Alex").toEmployeeViewAfter()
+                }
+           }
+        """.trimIndent()
+            .shouldNotCompile()
     }
 
 })
