@@ -1,25 +1,22 @@
 package com.driver733.mapstructfluent
 
-import org.assertj.core.api.Assertions.assertThat
-import org.junit.jupiter.api.Test
-import org.springframework.beans.factory.annotation.Autowired
+import io.kotest.core.spec.style.FunSpec
+import io.kotest.matchers.shouldBe
 import org.springframework.boot.test.context.SpringBootTest
 
 @SpringBootTest
-class EmployeeMapperTest @Autowired constructor(
-        private val mapper: EmployeeMapper
-) {
+class EmployeeMapperTest(
+    private val mapper: EmployeeMapper
+) : FunSpec({
 
-    @Test
-    fun `extension fun result must be equal to the mapper instance fun result`() {
+    test("extension fun result should be equal to the mapper instance fun result") {
         val model = EmployeeModel("Alex")
-        assertThat(
-                model.toEmployeeView()
-        ).isEqualTo(
+
+        model
+            .toEmployeeView()
+            .shouldBe(
                 mapper.toEmployeeView(model)
-        )
+            )
     }
 
-}
-
-
+})
