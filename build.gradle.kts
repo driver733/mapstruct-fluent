@@ -159,21 +159,6 @@ releaseSubprojects()
 
         }
 
-releaseSubprojects().forEach {
-    it.dependencies {
-        implementation("com.squareup:kotlinpoet:1.5.0")
-    }
-}
-
-processorSubprojects().forEach {
-    it.dependencies {
-        implementation("com.google.auto.service:auto-service:1.0-rc6")
-        kapt("com.google.auto.service:auto-service:1.0-rc6")
-    }
-}
-
 fun releaseSubprojects() =
-    subprojects.filter { it.name in listOf("processor", "processor-spring", "common") }
-
-fun processorSubprojects() =
-    subprojects.filter { it.name in listOf("processor", "processor-spring") }
+        subprojects
+                .filter { it.name in listOf("processor", "processor-spring", "common") }
