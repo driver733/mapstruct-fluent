@@ -21,12 +21,14 @@ import javax.lang.model.element.TypeElement
 @SupportedOptions(KAPT_KOTLIN_GENERATED_OPTION_NAME)
 class MapstructFluentExtensionsAnnotationProcessor : AbstractProcessor(), MapperMethodProcessor {
 
-    private val genericProcessor = GenericProcessor()
+    private val genericProcessor =
+        GenericProcessor()
 
     override fun process(annotations: MutableSet<out TypeElement>?, roundEnv: RoundEnvironment?) =
         genericProcessor.process(roundEnv, processingEnv, this)
 
-    override fun fileSpecBuilder(mapper: Element) = fileSpecBuilder(processingEnv, mapper, "FluentExtensions")
+    override fun fileSpecBuilder(mapper: Element) =
+        fileSpecBuilder(processingEnv, mapper, "FluentExtensions")
 
     override fun process(fileSpecBuilder: FileSpec.Builder, method: ExecutableElement, mapper: Element, src: String?) {
         fileSpecBuilder

@@ -1,5 +1,7 @@
 package com.driver733.mapstructfluent
 
+import org.mapstruct.AfterMapping
+import org.mapstruct.BeforeMapping
 import org.mapstruct.Mapper
 import javax.annotation.processing.ProcessingEnvironment
 import javax.annotation.processing.RoundEnvironment
@@ -36,19 +38,39 @@ class GenericProcessor {
         src: String?,
         processor: MapperMethodProcessor
     ) =
-        roundEnv?.getElementsAnnotatedWith(Mapper::class.java)?.forEach { mapper ->
-            mapper
-                .takeIf { it.modifiers.contains(ABSTRACT) }
-                ?.enclosedElements
-                ?.filter { it.kind == ElementKind.METHOD }
-                ?.filter { it.modifiers.contains(PUBLIC) }
-                ?.filter { it.modifiers.contains(ABSTRACT) }
-                ?.map { it as ExecutableElement }
-                ?.also { methods ->
-                    val fileSpecBuilder = processor.fileSpecBuilder(mapper)
-                    methods.forEach {
-                        processor.process(fileSpecBuilder, it, mapper, src)
+        roundEnv
+            ?.getElementsAnnotatedWith(Mapper::class.java)
+            ?.forEach { mapper ->
+                mapper
+                    .takeIf { it.modifiers.contains(ABSTRACT) }
+                    ?.enclosedElements
+                    ?.filter { it.kind == ElementKind.METHOD }
+                    ?.map { it as ExecutableElement }
+                    ?.filter { it.modifiers.contains(PUBLIC) }
+                    ?.filter(b())
+                    ?.also { methods ->
+                        val fileSpecBuilder = processor.fileSpecBuilder(mapper)
+                        methods.forEach {
+                            processor.process(fileSpecBuilder, it, mapper, src)
+                        }
                     }
-                }
+            }
+
+    private fun b() = { it: ExecutableElement ->
+        it.modifiers.contains(ABSTRACT) || it.hasNotAnnotations(
+            BeforeMapping::class.java,
+            AfterMapping::class.java
+        )
+    }
+
+    private fun <T : Annotation> ExecutableElement.hasNotAnnotations(vararg classes: Class<out T>) =
+        classes.all {
+            hasNotAnnotation(it)
         }
+
+    private fun <T : Annotation> ExecutableElement.hasNotAnnotation(clazz: Class<T>) =
+        !hasAnnotation(clazz)
+
+    private fun <T : Annotation> ExecutableElement.hasAnnotation(clazz: Class<T>) =
+        getAnnotation(clazz) != null
 }
