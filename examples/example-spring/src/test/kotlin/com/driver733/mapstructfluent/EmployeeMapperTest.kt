@@ -20,6 +20,30 @@ class EmployeeMapperTest @Autowired constructor(
         )
     }
 
+    @Test
+    fun `extension fun result must be equal to the mapper instance fun result2`() {
+        val model = EmployeeModel("Alex")
+        assertThat(
+            model.toEmployeeCustomView()
+        ).isEqualTo(
+            mapper.toEmployeeCustomView(model)
+        )
+    }
+
+    @Test
+    fun `extension fun result must be equal to the mapper instance fun result3`() {
+        val model = EmployeeModel("Alex")
+        assertThat(
+            model.toEmployeeCustomView()
+        ).isEqualTo(
+            mapper.toEmployeeCustomView(model)
+        )
+
+
+    }
+
+
+
 }
 
 
