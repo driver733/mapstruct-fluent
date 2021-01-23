@@ -5,6 +5,6 @@ import javax.lang.model.element.Element
 import javax.lang.model.element.ExecutableElement
 
 interface MapperMethodProcessor {
-    fun process(fileSpecBuilder: FileSpec.Builder, method: ExecutableElement, mapper: Element, src: String?)
+    fun process(fileSpecBuilder: FileSpec.Builder, method: ExecutableElement, mapper: Element)
     fun fileSpecBuilder(mapper: Element): FileSpec.Builder
 }
