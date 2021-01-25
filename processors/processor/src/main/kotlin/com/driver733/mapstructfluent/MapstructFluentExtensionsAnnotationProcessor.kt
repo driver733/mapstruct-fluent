@@ -2,8 +2,8 @@ package com.driver733.mapstructfluent
 
 import com.google.auto.service.AutoService
 import com.squareup.kotlinpoet.FileSpec
-import com.squareup.kotlinpoet.FunSpec
-import java.io.File
+import com.squareup.kotlinpoet.KModifier
+import com.squareup.kotlinpoet.PropertySpec
 import javax.annotation.processing.AbstractProcessor
 import javax.annotation.processing.Processor
 import javax.annotation.processing.RoundEnvironment
@@ -21,16 +21,21 @@ import javax.lang.model.element.TypeElement
 @SupportedOptions(KAPT_KOTLIN_GENERATED_OPTION_NAME)
 class MapstructFluentExtensionsAnnotationProcessor : AbstractProcessor(), MapperMethodProcessor {
 
-    private val genericProcessor =
-        GenericProcessor()
+    private val genericProcessor = GenericProcessor()
 
     override fun process(annotations: MutableSet<out TypeElement>?, roundEnv: RoundEnvironment?) =
         genericProcessor.process(roundEnv, processingEnv, this)
 
     override fun fileSpecBuilder(mapper: Element) =
         fileSpecBuilder(processingEnv, mapper, "FluentExtensions")
+            .addProperty(
+                PropertySpec
+                    .builder("mapper", mapper.kotlinType(), KModifier.PRIVATE)
+                    .initializer("Mappers.getMapper(${mapper.simpleName}::class.java)")
+                    .build()
+            )
 
-    override fun process(fileSpecBuilder: FileSpec.Builder, method: ExecutableElement, mapper: Element, src: String?) {
+    override fun process(fileSpecBuilder: FileSpec.Builder, method: ExecutableElement, mapper: Element) {
         fileSpecBuilder
             .addImport(
                 processingEnv.elementUtils.getPackageOf(method).toString(),
@@ -38,19 +43,6 @@ class MapstructFluentExtensionsAnnotationProcessor : AbstractProcessor(), Mapper
             )
             .addImport(
                 "org.mapstruct.factory.Mappers", ""
-            )
-            .addFunction(
-                FunSpec
-                    .builder("${method.simpleName}")
-                    .receiver(method.parameters.first().kotlinType())
-                    .addStatement(
-                        "return Mappers.getMapper(${mapper.simpleName}::class.java).${method.simpleName}(this)"
-                    )
-                    .build()
-            )
-            .build()
-            .writeTo(
-                File(src!!).apply { mkdir() }
             )
     }
 }

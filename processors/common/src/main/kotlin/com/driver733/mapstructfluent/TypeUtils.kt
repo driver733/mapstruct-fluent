@@ -1,6 +1,7 @@
 package com.driver733.mapstructfluent
 
 import com.squareup.kotlinpoet.ClassName
+import com.squareup.kotlinpoet.ParameterSpec
 import com.squareup.kotlinpoet.ParameterizedTypeName
 import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
 import com.squareup.kotlinpoet.TypeName
@@ -8,7 +9,6 @@ import com.squareup.kotlinpoet.WildcardTypeName
 import com.squareup.kotlinpoet.asTypeName
 import org.jetbrains.annotations.Nullable
 import javax.lang.model.element.Element
-import javax.lang.model.element.VariableElement
 import kotlin.reflect.jvm.internal.impl.builtins.jvm.JavaToKotlinClassMap
 import kotlin.reflect.jvm.internal.impl.name.FqName
 
@@ -16,14 +16,14 @@ import kotlin.reflect.jvm.internal.impl.name.FqName
 fun className(vararg elements: Element) =
     ClassName("", *elements.map { it.simpleName.toString() }.toTypedArray())
 
-fun VariableElement.kotlinType() =
+fun Element.kotlinType() =
     kotlinTypeWithInferredNullability()
 
-private fun VariableElement.kotlinTypeWithInferredNullability() =
+private fun Element.kotlinTypeWithInferredNullability() =
     typeToKotlinType()
         .let { if (isNullable()) it.copy(true) else it.copy(false) }
 
-private fun VariableElement.typeToKotlinType() =
+private fun Element.typeToKotlinType() =
     asType().asTypeName().toKotlinType()
 
 fun Element.isNullable() =
@@ -57,3 +57,9 @@ fun TypeName.toKotlinType(): TypeName =
             }
         }
     }
+
+fun Element.toParameterSpec() =
+    ParameterSpec(simpleName.toString(), kotlinType(), emptyList())
+
+fun List<ParameterSpec>.joinToString() =
+    if (isNotEmpty()) joinToString(prefix = ", ", transform = ParameterSpec::name) else ""

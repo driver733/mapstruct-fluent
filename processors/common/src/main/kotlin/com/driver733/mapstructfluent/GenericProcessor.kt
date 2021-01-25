@@ -1,14 +1,17 @@
 package com.driver733.mapstructfluent
 
+import com.squareup.kotlinpoet.FunSpec
 import org.mapstruct.AfterMapping
 import org.mapstruct.BeforeMapping
 import org.mapstruct.Mapper
+import java.io.File
 import javax.annotation.processing.ProcessingEnvironment
 import javax.annotation.processing.RoundEnvironment
 import javax.lang.model.element.ElementKind
 import javax.lang.model.element.ExecutableElement
 import javax.lang.model.element.Modifier.ABSTRACT
 import javax.lang.model.element.Modifier.PUBLIC
+import javax.lang.model.element.VariableElement
 import javax.tools.Diagnostic
 
 class GenericProcessor {
@@ -50,8 +53,26 @@ class GenericProcessor {
                     ?.filter(b())
                     ?.also { methods ->
                         val fileSpecBuilder = processor.fileSpecBuilder(mapper)
-                        methods.forEach {
-                            processor.process(fileSpecBuilder, it, mapper, src)
+
+                        methods.forEach { method ->
+                            val receiver = method.parameters.first().kotlinType()
+                            val otherParameters = method.parameters.drop(1).map(VariableElement::toParameterSpec)
+
+                            processor.process(fileSpecBuilder, method, mapper)
+
+                            fileSpecBuilder
+                                .addFunction(
+                                    FunSpec
+                                        .builder("${method.simpleName}")
+                                        .receiver(receiver)
+                                        .addParameters(otherParameters)
+                                        .addStatement(
+                                            "return mapper.${method.simpleName}(this${otherParameters.joinToString()})"
+                                        )
+                                        .build()
+                                )
+                                .build()
+                                .writeTo(File(src!!).apply { mkdir() })
                         }
                     }
             }
