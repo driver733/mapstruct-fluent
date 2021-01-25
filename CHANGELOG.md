@@ -1,3 +1,16 @@
+## [1.1.0](https://github.com/driver733/mapstruct-fluent/compare/v1.0.6...v1.1.0) (2021-01-25)
+
+
+### Features
+
+* Additional parameters in extension functions ([e120038](https://github.com/driver733/mapstruct-fluent/commit/e12003852912b51a2d8180feb9ba3329a96e43ee))
+
+
+### Miscellaneous Chores
+
+* gh actions wf fix ([1691bc6](https://github.com/driver733/mapstruct-fluent/commit/1691bc6e5f1932c6438880c2667ce84c975967fe))
+* gh workflows fix ([cf57ad2](https://github.com/driver733/mapstruct-fluent/commit/cf57ad22b101a525cd5d10e829527daf031fc1c4))
+
 ### [1.0.6](https://github.com/driver733/mapstruct-fluent/compare/v1.0.5...v1.0.6) (2020-12-18)
 
 
