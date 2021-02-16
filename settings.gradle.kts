@@ -7,3 +7,9 @@ include("processors:processor-spring")
 include("examples")
 include("examples:example")
 include("examples:example-spring")
+
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+    }
+}

@@ -3,7 +3,7 @@ import java.time.Duration
 import java.util.*
 
 plugins {
-    id("com.driver733.gradle-kotlin-setup-plugin") version "5.0.1"
+    id("com.driver733.gradle-kotlin-setup-plugin") version "6.0.2"
     id("io.codearte.nexus-staging") version "0.21.2"
     id("de.marcphilipp.nexus-publish") version "0.4.0"
     `maven-publish`
@@ -21,6 +21,11 @@ allprojects {
 
     apply<com.driver733.gradle.plugin.kotlinsetup.GradleKotlinSetupPluginPlugin>()
     apply<de.marcphilipp.gradle.nexus.NexusPublishPlugin>()
+
+    dependencies {
+        implementation("org.mapstruct:mapstruct:1.4.2.Final")
+        kapt("org.mapstruct:mapstruct-processor:1.4.2.Final")
+    }
 
     detekt {
         ignoreFailures = false
@@ -42,7 +47,6 @@ allprojects {
             }
         }
     }
-
 }
 
 nexusStaging {
