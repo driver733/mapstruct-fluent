@@ -1,3 +1,10 @@
+### [1.1.1](https://github.com/driver733/mapstruct-fluent/compare/v1.1.0...v1.1.1) (2021-02-16)
+
+
+### Bug Fixes
+
+* deps upd ([cdf4fad](https://github.com/driver733/mapstruct-fluent/commit/cdf4fad6c79bb35824e80125c46284f387fc974f))
+
 ## [1.1.0](https://github.com/driver733/mapstruct-fluent/compare/v1.0.6...v1.1.0) (2021-01-25)
 
 
