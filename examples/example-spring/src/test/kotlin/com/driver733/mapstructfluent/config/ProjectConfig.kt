@@ -1,4 +1,4 @@
-package config
+package com.driver733.mapstructfluent.config
 
 import io.kotest.core.config.AbstractProjectConfig
 import io.kotest.core.extensions.Extension
